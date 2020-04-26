@@ -5,7 +5,7 @@
 # COPY src ${BASE}/src
 # RUN --mount=type=cache,target=/root/.m2 mvn -f ${BASE}/pom.xml install -DskipTests
 
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk
 RUN useradd --create-home -s /bin/bash user
 WORKDIR /home/user
 USER user
