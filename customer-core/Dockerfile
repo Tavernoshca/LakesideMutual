@@ -5,13 +5,7 @@
 # COPY src ${BASE}/src
 # RUN --mount=type=cache,target=/root/.m2 mvn -f ${BASE}/pom.xml install -DskipTests
 
-FROM openjdk:8-jdk
-RUN useradd --create-home -s /bin/bash user
-WORKDIR /home/user
-USER user
-RUN wget -c https://downloads.apache.org/maven/maven-3/3.6.3/source/apache-maven-3.6.3-src.tar.gz
-RUN tar xzvf apache-maven-3.6.3-src.tar.gz
-RUN export PATH="$HOME/apache-maven-3.6.3/bin:$PATH"
+FROM jtim/maven-non-root
 RUN mvn -f ${BASE}/pom.xml install -DskipTests
 
 FROM openjdk:8-jdk-alpine
