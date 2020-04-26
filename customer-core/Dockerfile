@@ -1,11 +1,14 @@
 # syntax=docker/dockerfile:experimental
-#FROM maven:3.6.1-jdk-8-alpine AS build
+# FROM maven:3.6.1-jdk-8-alpine AS build
 # ARG BASE=/usr/src/app
 # COPY pom.xml ${BASE}/
 # COPY src ${BASE}/src
 # RUN --mount=type=cache,target=/root/.m2 mvn -f ${BASE}/pom.xml install -DskipTests
 
-FROM jtim/maven-non-root
+FROM jtim/maven-non-root AS build
+ARG BASE=/usr/src/app
+COPY pom.xml ${BASE}/
+COPY src ${BASE}/src
 RUN mvn -f ${BASE}/pom.xml install -DskipTests
 
 FROM openjdk:8-jdk-alpine
