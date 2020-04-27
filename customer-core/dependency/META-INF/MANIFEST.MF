@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven 3.6.3
+Built-By: lucatavernini
+Build-Jdk: 13.0.2
+Implementation-Title: customer-core
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.lakesidemutual
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/customer-core
+Main-Class: org.springframework.boot.loader.JarLauncher
+Start-Class: com.lakesidemutual.customercore.CustomerCoreApplication
+Spring-Boot-Version: 2.1.0.RELEASE
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+
