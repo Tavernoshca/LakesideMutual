@@ -1,33 +1,15 @@
 # syntax=docker/dockerfile:experimental
 
-# FROM maven:3.6.1-jdk-8-alpine AS build
-# ARG BASE=/usr/src/app
-# COPY pom.xml ${BASE}/
-# COPY src ${BASE}/src
-# RUN --mount=type=cache,target=/root/.m2 mvn -f ${BASE}/pom.xml install -DskipTests
-
-# FROM openjdk:8-jdk-alpine
-# COPY --from=build /usr/src/app/target/dependency/BOOT-INF/lib/* /app/lib/
-# COPY --from=build /usr/src/app/target/dependency/META-INF /app/META-INF
-# COPY --from=build /usr/src/app/target/dependency/BOOT-INF/classes /app
+FROM maven:3.6.1-jdk-8-alpine AS build
+ARG BASE=/usr/src/app
+COPY pom.xml ${BASE}/
+COPY src ${BASE}/src
+RUN --mount=type=cache,target=/root/.m2 mvn -f ${BASE}/pom.xml install -DskipTests
 
 FROM openjdk:8-jdk-alpine
-WORKDIR /usr/src/app
-
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-COPY src src
-
-RUN ./mvnw install -DskipTests
-RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
-
-ARG DEPENDENCY=/usr/src/app/target/dependency
-RUN mkdir /app
-RUN mkdir /app/lib
-RUN cp -a ${DEPENDENCY}/BOOT-INF/lib/* /app/lib/
-RUN cp -a ${DEPENDENCY}/META-INF /app/META-INF
-RUN cp -a ${DEPENDENCY}/BOOT-INF/classes /app
+COPY --from=build /usr/src/app/target/dependency/BOOT-INF/lib/* /app/lib/
+COPY --from=build /usr/src/app/target/dependency/META-INF /app/META-INF
+COPY --from=build /usr/src/app/target/dependency/BOOT-INF/classes /app
 
 EXPOSE 8110
-ENTRYPOINT ["java","/app/customer-core-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.lakesidemutual.customercore.CustomerCoreApplication"]
