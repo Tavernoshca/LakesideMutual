@@ -11,7 +11,7 @@
 # COPY --from=build /usr/src/app/target/dependency/META-INF /app/META-INF
 # COPY --from=build /usr/src/app/target/dependency/BOOT-INF/classes /app
 
-FROM openjdk:8-jdk-alpine as build
+FROM openjdk:8-jdk-alpine
 WORKDIR /usr/src/app
 
 COPY mvnw .
