@@ -4,7 +4,6 @@
 FROM maven:3.6.3-jdk-8-slim AS build
 
 COPY fix-permissions.sh /bin/
-RUN fix-permissions.sh /bin
 RUN fix-permissions.sh /sbin
 RUN fix-permissions.sh /usr/bin
 RUN fix-permissions.sh /usr/sbin
