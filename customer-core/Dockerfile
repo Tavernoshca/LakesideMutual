@@ -30,4 +30,4 @@ RUN cp -a ${DEPENDENCY}/META-INF /app/META-INF
 RUN cp -a ${DEPENDENCY}/BOOT-INF/classes /app
 
 EXPOSE 8110
-ENTRYPOINT ["java","-cp","app:app/*","customer-core-0.0.1-SNAPSHOT"]
+ENTRYPOINT ["java","/app/customer-core-0.0.1-SNAPSHOT.jar"]
