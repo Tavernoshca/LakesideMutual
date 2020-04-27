@@ -23,9 +23,9 @@ RUN ./mvnw install -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 ARG DEPENDENCY=/usr/src/app/target/dependency
-COPY ${DEPENDENCY}/BOOT-INF/lib/* /app/lib/
-COPY ${DEPENDENCY}/META-INF /app/META-INF
-COPY ${DEPENDENCY}/BOOT-INF/classes /app
+RUN cp ${DEPENDENCY}/BOOT-INF/lib/* /app/lib/
+RUN cp ${DEPENDENCY}/META-INF /app/META-INF
+RUN cp ${DEPENDENCY}/BOOT-INF/classes /app
 
 EXPOSE 8110
 ENTRYPOINT ["java","-cp","app:app/lib/*","com.lakesidemutual.customercore.CustomerCoreApplication"]
