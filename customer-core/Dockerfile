@@ -23,6 +23,7 @@ RUN ./mvnw install -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 ARG DEPENDENCY=/usr/src/app/target/dependency
+RUN mkdir /app
 RUN mkdir /app/lib
 RUN cp -a ${DEPENDENCY}/BOOT-INF/lib/. /app/lib/
 RUN cp -a ${DEPENDENCY}/META-INF /app/META-INF
