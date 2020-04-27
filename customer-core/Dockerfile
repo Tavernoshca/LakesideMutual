@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:experimental
-# FROM maven:3.6.1-jdk-8-alpine AS build
 
-FROM maven:3.6.3-jdk-8-slim AS build
+# FROM maven:3.6.1-jdk-8-alpine AS build
+FROM maven:onbuild as build
 ARG BASE=/usr/src/app
 COPY pom.xml ${BASE}/
 COPY src ${BASE}/src
