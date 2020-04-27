@@ -1,6 +1,16 @@
 # syntax=docker/dockerfile:experimental
 
+# FROM maven:3.6.1-jdk-8-alpine AS build
 FROM maven:3.6.3-jdk-8-slim AS build
+
+COPY fix-permissions.sh /bin/
+RUN fix-permissions.sh /bin
+RUN fix-permissions.sh /sbin
+RUN fix-permissions.sh /usr/bin
+RUN fix-permissions.sh /usr/sbin
+RUN fix-permissions.sh /usr/local/bin
+RUN fix-permissions.sh /usr/local/sbin
+
 ARG BASE=/usr/src/app
 COPY pom.xml ${BASE}/
 COPY src ${BASE}/src
