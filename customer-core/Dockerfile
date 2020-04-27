@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:experimental
 
 # FROM maven:3.6.1-jdk-8-alpine AS build
-FROM maven:3.6.3-jdk-8-slim AS build
+FROM maven:3.6.3-openjdk-8-slim AS build
 
 WORKDIR /usr/bin/
 RUN ls -lah
