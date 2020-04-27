@@ -3,7 +3,11 @@
 # FROM maven:3.6.1-jdk-8-alpine AS build
 FROM maven:3.6.3-jdk-8-slim AS build
 
-RUN chmod +x /usr/bin/mvn
+WORKDIR /usr/bin/
+RUN ls -lah
+
+WORKDIR /usr/share/maven/bin
+RUN ls -lah
 
 ARG BASE=/usr/src/app
 COPY pom.xml ${BASE}/
